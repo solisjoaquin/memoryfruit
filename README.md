@@ -6,6 +6,12 @@
 
 https://memoryfruit.netlify.app/
 
+## Dependencias 
+
+* React
+* React DOM
+* Styled Components
+
 ## Instalar dependencias 
 
 ```
