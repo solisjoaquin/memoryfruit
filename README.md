@@ -1,5 +1,6 @@
 # Memory Fruit Game
 
+![image](https://raw.githubusercontent.com/solisjoaquin/memoryfruit/main/captures/memory-fruit-screenshoot.PNG)
 
 ## Demo
 
