@@ -10,7 +10,7 @@ export default function App() {
   // array con cartas seleccionadas
   const [selectedCards, setSelectedCards] = useState([]);
 
-  // booleano que cuando las cartas son iguales se vuelve true y agrega al array de cartas acertadas 
+  // booleano que cuando las cartas son iguales se vuelve true 
   const [gameWon, setGameWon] = useState(false);
 
   // Cantidad de intentos
@@ -40,6 +40,7 @@ export default function App() {
       setGameWon(hasGameBeenWon);
 
     } else {
+      // si las cartas no coinciden las vuelvo a colocar en false
       const newCards = cards.map((card) => {
         if (card.id === firstCard.id || card.id === secondCard.id) {
           const newCard = { ...card, flipped: false };
@@ -48,25 +49,33 @@ export default function App() {
           return card;
         }
       });
+      // actualizo el set con las cartas de espalda otra vez
       setCards(newCards);
+      // Agrego un intento
       setIntentos(intentos + 1);
     }
-
+    // defino un array vacio para el proximo para de cartas
     setSelectedCards([]);
   };
 
-  // 
+  // metodo para dar vuelta las cartas, recibo el id de la carta clickeada
   const flipCard = (id) => {
+    // defino un array con las cartas dadas vueltas y las que no
     const newCardData = cards.map((card) => {
+      // busco la carta con el id verificando que no esta dada vuelta
       if (card.id === id && !card.flipped) {
+        // le asigno el valor true a esa carta
         const newCard = { ...card, flipped: true };
+
         setSelectedCards([...selectedCards, newCard]);
+        // devuelvo la carta dada vuelta
         return newCard;
       } else {
+        // las cartas que no sean del mismo id vuelven como estan
         return card;
       }
     });
-
+    // actualizo las cartas 
     setCards(newCardData);
   };
 
