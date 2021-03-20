@@ -66,7 +66,7 @@ export default function App() {
       if (card.id === id && !card.flipped) {
         // le asigno el valor true a esa carta
         const newCard = { ...card, flipped: true };
-
+        // agrego la carta al array que compara 2 cartas
         setSelectedCards([...selectedCards, newCard]);
         // devuelvo la carta dada vuelta
         return newCard;
@@ -82,8 +82,11 @@ export default function App() {
   // Empezar de nuevo
   const handleReset = () => {
     setGameWon(false)
+    // doy vuelta a cada carta
     cards.map(card => card.flipped = false)
+    // cambio el orden de las cartas
     setCards(cards.sort(() => Math.random() - 0.5))
+    // vuelvo los intentos a cero
     setIntentos(0)
   }
   return (
