@@ -23,3 +23,8 @@ npm install
 ```
 npm run dev
 ```
+
+## Actualizaciones
+
+* Version Mobile y Desktop 
+* PWA (se puede jugar offline)
