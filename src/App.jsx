@@ -3,6 +3,8 @@ import GameBoard from "./components/GameBoard";
 import "./styles.css";
 import data from "./cardsData";
 import styled from "styled-components";
+
+
 export default function App() {
   // array con cada icono 
   const [cards, setCards] = useState(data);
@@ -81,6 +83,8 @@ export default function App() {
 
   // Empezar de nuevo
   const handleReset = () => {
+    setOnOverlay(!onOverlay)
+
     setGameWon(false)
     // doy vuelta a cada carta
     cards.map(card => card.flipped = false)
@@ -88,9 +92,36 @@ export default function App() {
     setCards(cards.sort(() => Math.random() - 0.5))
     // vuelvo los intentos a cero
     setIntentos(0)
+
+    setTimeout(() => setBoton(!boton), 3000)
+
   }
+
+  // manejo el overlay con true y false 
+  const [onOverlay, setOnOverlay] = useState(false)
+  // 
+  const [boton, setBoton] = useState(true)
+
+  // cuando la pagina carga por primera vez aparace el overlay por 3seg
+  useEffect(() => {
+    setTimeout(() => setOnOverlay(!onOverlay), 3000)
+  }, []);
+
+  // cuando el usuario reinicia el juego le aparece un boton para empezar
+  const handleOverlayButton = () => {
+    setOnOverlay(!onOverlay)
+    setTimeout(() => setBoton(!boton), 3000)
+    console.log(onOverlay)
+  }
+
   return (
-    <div className="App">
+    <AppContainer>
+      <div className="overlay" style={{ display: onOverlay ? "none" : "block" }} >
+        <div class="box">
+          <Title style={{ display: boton ? "block" : "none" }}  > Cargando ...</Title>
+          <ResetButton style={{ display: boton ? "none" : "block" }} onClick={() => handleOverlayButton()}>Empezar</ResetButton>
+        </div>
+      </div>
 
       <Title>Memory fruit</Title>
 
@@ -99,7 +130,6 @@ export default function App() {
         :
         <ScoreStyle>Intentos: {intentos}</ScoreStyle>
       }
-
       <GameBoard cards={cards} flipCard={flipCard} />
 
       {gameWon ?
@@ -107,10 +137,70 @@ export default function App() {
         :
         <Instructions>Gira dos cartas y encuentra los pares en la menor cantidad de intentos. Los intentos acertados no suman.</Instructions>
       }
-
-    </div>
+      <div>
+        <a style={{ color: "white" }} href="https://github.com/solisjoaquin/memoryfruit">Github</a>
+      </div>
+    </AppContainer>
   );
 }
+const AppContainer = styled.div`
+font-family: sans-serif;
+text-align: center;
+display: flex;
+padding-bottom: 100px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background: linear-gradient(
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5)
+  ),
+  url("https://www.xtrafondos.com/wallpapers/fall-guys-ultimate-knockout-6204.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 2;
+  cursor: pointer;
+  .box {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+`
+const Overlay = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 2;
+  cursor: pointer;
+
+  .box {
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
 
 const Title = styled.h1`
 font-family: "Fredoka One", cursive;
@@ -142,7 +232,7 @@ text-shadow: 2px 2px 7px rgb(87, 86, 86);
 
 const ResetButton = styled.button`
 font-family: "Fredoka One", cursive;
-margin: 30px 20px;
+margin: 30px 30px;
 font-size: 1.5rem;
 padding: 20px 30px;
 background-color: white;
