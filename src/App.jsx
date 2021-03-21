@@ -104,13 +104,13 @@ export default function App() {
 
   // cuando la pagina carga por primera vez aparace el overlay por 3seg
   useEffect(() => {
-    setTimeout(() => setOnOverlay(!onOverlay), 3000)
+    setTimeout(() => setOnOverlay(!onOverlay), 2000)
   }, []);
 
   // cuando el usuario reinicia el juego le aparece un boton para empezar
   const handleOverlayButton = () => {
     setOnOverlay(!onOverlay)
-    setTimeout(() => setBoton(!boton), 3000)
+    setTimeout(() => setBoton(!boton), 2000)
     console.log(onOverlay)
   }
 
@@ -207,10 +207,13 @@ font-family: "Fredoka One", cursive;
 font-size: 4rem;
 color: white;
 font-style: bold;
-text-shadow: 2px 2px 3px rgb(80, 80, 80);
+padding-bottom:20px;
+padding-top:10px;
+text-shadow: 3px 3px 4px #f73ba1;
 @media only screen and (max-width: 600px) {
   padding-top: 20px;
   font-size: 3rem;
+  padding-bottom:10px;
 }
 `
 
@@ -219,7 +222,7 @@ font-family: "Fredoka One", cursive;
 font-size: 3rem;
 color: white;
 font-style: bold;
-text-shadow: 2px 2px 7px rgb(87, 86, 86);
+text-shadow: 2px 2px 4px #396c9d;
 @media only screen and (max-width: 600px) {
     font-size: 2rem;
 }
@@ -238,7 +241,7 @@ padding: 20px 30px;
 background-color: white;
 border-radius: 9999px;
 border:none;
-box-shadow: 2px 3px #888888;
+box-shadow: 2px 3px #2fd7dc;
 
 &:hover {
   cursor: pointer;
