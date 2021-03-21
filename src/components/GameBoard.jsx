@@ -11,6 +11,7 @@ export default function GameBoard({ cards, flipCard }) {
                     flipCard={flipCard}
                     value={card.value}
                     id={card.id}
+                    key={card.id}
                 />
             ))}
         </Board>

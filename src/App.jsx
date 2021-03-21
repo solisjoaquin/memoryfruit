@@ -104,7 +104,7 @@ export default function App() {
 
   // cuando la pagina carga por primera vez aparace el overlay por 3seg
   useEffect(() => {
-    setTimeout(() => setOnOverlay(!onOverlay), 2000)
+    setTimeout(() => setOnOverlay(!onOverlay), 3000)
   }, []);
 
   // cuando el usuario reinicia el juego le aparece un boton para empezar
@@ -117,13 +117,13 @@ export default function App() {
   return (
     <AppContainer>
       <div className="overlay" style={{ display: onOverlay ? "none" : "block" }} >
-        <div class="box">
+        <div className="box">
           <Title style={{ display: boton ? "block" : "none" }}  > Cargando ...</Title>
           <ResetButton style={{ display: boton ? "none" : "block" }} onClick={() => handleOverlayButton()}>Empezar</ResetButton>
         </div>
       </div>
 
-      <Title>Memory fruit</Title>
+      <Title>Memory Fruit</Title>
 
       {gameWon ?
         <ScoreStyle> <span className="winner">👑 </span>Intentos totales: {intentos} </ScoreStyle>
@@ -175,6 +175,7 @@ background-repeat: no-repeat;
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction:column;
     align-items: center;
     justify-content: center;
   }
