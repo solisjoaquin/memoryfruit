@@ -65,7 +65,7 @@ export default function App() {
     // defino un array con las cartas dadas vueltas y las que no
     const newCardData = cards.map((card) => {
       // busco la carta con el id verificando que no esta dada vuelta
-      if (card.id === id && !card.flipped) {
+      if (card.id === id && !card.flipped && (selectedCards.length == 1 || selectedCards.length == 0)) {
         // le asigno el valor true a esa carta
         const newCard = { ...card, flipped: true };
         // agrego la carta al array que compara 2 cartas
